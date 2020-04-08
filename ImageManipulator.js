@@ -169,6 +169,7 @@ function start() {
     alert.innerHTML += `<div class="alert"><span class="closebtn" onclick="buttonFade()">&times;</span>
     Wait for all ${document.getElementById("photos").files.length} images to load at the bottom </div>`;
     buttonFade();
+    window.scrollTo(0,0);
 
     let images = imgToData(document.getElementById("photos"));
     //console.log(images);
@@ -180,6 +181,7 @@ function sizeAlert() {
         alert.innerHTML += `<div class="alert" id="warning"><span class="closebtn" onclick="buttonFade()">&times;</span>
     Clear and reload any images after changing image size </div>`;
         buttonFade();
+        window.scrollTo(0,0);
         document.getElementById("warning").style.opacity = "1";
         warning = false;
     }

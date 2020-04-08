@@ -1,3 +1,8 @@
+html
+{
+    scroll-behavior: smooth;
+}
+
 body {
     background-image: url("Tile Image 1586273302.png");
     background-size: cover;
@@ -26,9 +31,9 @@ h3 {
 
 #main-containor {
     background: rgba(39,39,97,0.81);
-    padding: 2%;
+    padding: 2% 5%;
     margin: auto;
-    width: 30%;
+    width: fit-content;
     text-align: center;
     transition: opacity 2s;
     opacity: 0;
@@ -38,7 +43,7 @@ h3 {
     background: rgba(39,39,97,0.81);
     padding: 2%;
     margin: auto;
-    width: auto;
+    width: fit-content;
     text-align: center;
     transition: opacity 2s;
     transition-delay: 1s;
@@ -65,9 +70,9 @@ canvas {
 
 #loaded-images {
     background: rgba(39,39,97,0.81);
-    padding: 2%;
+    padding: 2% 3%;
     margin: auto;
-    width: 30%;
+    width: fit-content;
     text-align: center;
 
     bottom: 10px;
@@ -161,4 +166,14 @@ a:hover
 a:active
 {
     color: #00c9a3;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+body {
+    -ms-overflow-style: none;
 }
