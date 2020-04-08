@@ -1,0 +1,164 @@
+body {
+    background-image: url("Tile Image 1586273302.png");
+    background-size: cover;
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: repeat;
+    font-family: "OCR B Std", serif;
+    font-size: small;
+}
+
+h1 {
+    color: white;
+    font-size: xx-large;
+    text-align: center;
+}
+
+h2{
+    color: white;
+    text-align: center;
+}
+
+h3 {
+    color: white;
+    text-align: center;
+}
+
+#main-containor {
+    background: rgba(39,39,97,0.81);
+    padding: 2%;
+    margin: auto;
+    width: 30%;
+    text-align: center;
+    transition: opacity 2s;
+    opacity: 0;
+}
+
+#canvas {
+    background: rgba(39,39,97,0.81);
+    padding: 2%;
+    margin: auto;
+    width: auto;
+    text-align: center;
+    transition: opacity 2s;
+    transition-delay: 1s;
+    opacity: 0;
+}
+
+#github {
+    background: rgba(39,39,97,0.81);
+    padding-left: 2%;
+    padding-right: 2%;
+    transition: opacity 2s;
+    transition-delay: 2.2s;
+    opacity: 0;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+}
+
+canvas {
+    display: inline;
+}
+
+#loaded-images {
+    background: rgba(39,39,97,0.81);
+    padding: 2%;
+    margin: auto;
+    width: 30%;
+    text-align: center;
+
+    bottom: 10px;
+    left: 33%;
+    right: 33%;
+
+    transition: opacity 2s;
+    transition-delay: 2s;
+    opacity: 0;
+}
+
+table {
+    width: auto;
+    margin: auto;
+    padding: 1%;
+    background: rgba(20,39,97,0.9);
+    transition: opacity 2s;
+    opacity: 1;
+}
+
+input {
+    width: auto;
+    margin: auto;
+    align-self: center;
+}
+
+.button {
+    color: white !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: rgba(39,39,97,0.81);
+    padding: 20px;
+    border: 4px solid rgba(20,39,97,0.81) !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+}
+
+.button:hover {
+    color: rgba(39,39,97,0.81) !important;
+    background: white;
+    border-color: white !important;
+    transition: all 0.4s ease 0s;
+}
+
+/* The alert message box */
+.alert {
+    padding: 20px;
+    background-color: #ad0a27; /* Red */
+    color: white;
+    margin-bottom: 15px;
+    opacity: 1;
+    transition: opacity 0.6s; /* 600ms to fade out */
+}
+
+#warning
+{
+    background-color: #1d5e9f;
+    opacity: 1;
+    transition: opacity 0.6s;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
+}
+
+a:link
+{
+    color: white;
+}
+a:visited
+{
+    color: white;
+}
+a:hover
+{
+    color: #1ac9a5;
+}
+a:active
+{
+    color: #00c9a3;
+}

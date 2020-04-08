@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Manipulator</title>
+    <link rel="stylesheet" type="text/css" href="ImageTileStyle.css">
+    <script type="text/javascript" src="ImageManipulator.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body onload="PageLoad()">
+<div class="alert-holder" id="alertID">
+</div>
+<div id="main-containor">
+    <h1>Image Tiling</h1>
+    <input class="button" id="photos" type="file" multiple accept="image/*" name="photo" />
+    <h2>Size and dimensions:</h2>
+
+    <table class="sizeTable" style="width:40%">
+        <tr>
+            <th><h3>Rows</h3></th>
+            <th><h3>Columns</h3></th>
+        </tr>
+        <tr>
+            <td><label for="rows"></label><input id="rows" type="number" value="10" /></td>
+            <td><label for="columns"></label><input id="columns" type="number" value="10" /></td>
+        </tr>
+    </table>
+
+<br>
+
+    <table class="sizeTable" style="width:40%">
+        <tr>
+            <th><h3>Image width</h3></th>
+            <th><h3>Image height</h3></th>
+        </tr>
+        <tr>
+            <td><label for="width"></label><input id="width" type="number" value="100" onchange="sizeAlert()" /></td>
+            <td><label for="height"></label><input id="height" type="number" value="100" onchange="sizeAlert()" /></td>
+        </tr>
+    </table>
+
+    <br>
+
+    <h2>Step 1:</h2>
+    <input class="button" type="button" value="Load Images" onclick="start()" />
+    <input class="button" type="button" value="Clear Images" onclick="deleteLoadedImages()" />
+
+    <br>
+    <h2>Step 2:</h2>
+    <input class="button" type="button" value="Make Tiles" onclick="addImages()" />
+    <h3>Random arrangement?</h3>
+    <label>
+        <input class="button" type="checkbox" id="randomBool" />
+    </label>
+    <!--    TODO Add checkbox for random order-->
+
+    <br>
+    <h2>Step 3:</h2>
+    <input class="button" type="button" value="Download" onclick="DownloadCanvas()" />
+
+</div>
+
+<br>
+
+<div id="canvas"></div>
+
+<br>
+
+<div id="loaded-images">
+    <h2>Loaded Images</h2>
+</div>
+<br>
+<div id="github">
+    <a target="_blank" href="https://github.com/George9Waller/Image-Tiles"><p>GitHub</p></a>
+</div>
+
+</body>
+</html>
