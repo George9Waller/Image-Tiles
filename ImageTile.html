@@ -13,6 +13,10 @@
 <div id="main-containor">
     <h1>Image Tiling</h1>
     <input class="button" id="photos" type="file" multiple accept="image/*" name="photo" />
+    <h3>Optional overlay:</h3>
+    <input class="button" id="overlay" type="file" name="overlay" onchange="OverlayAlert()"/>
+    <h3>Scale:</h3>
+    <input class="button" id="overlayscale" type="number" name="overlayscale" value="100" onchange="ScaleAlert()" />
     <h2>Size and dimensions:</h2>
 
     <table class="sizeTable" style="width:40%">
@@ -44,6 +48,7 @@
     <h2>Step 1:</h2>
     <input class="button" type="button" value="Load Images" onclick="start()" />
     <input class="button" type="button" value="Clear Images" onclick="deleteLoadedImages()" />
+    <input class="button" type="button" value="Clear Overlays" onclick="deleteOverlays()" />
 
     <br>
     <h2>Step 2:</h2>
@@ -68,6 +73,8 @@
 
 <div id="loaded-images">
     <h2>Loaded Images</h2>
+    <div id="loadedimagesbox"></div>
+    <div id="overlaybox"><h3>Overlays:</h3></div>
 </div>
 <br>
 <div id="github">

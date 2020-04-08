@@ -6,7 +6,7 @@ html
 body {
     background-image: url("Tile Image 1586273302.png");
     background-size: cover;
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-position: center;
     background-repeat: repeat;
     font-family: "OCR B Std", serif;
@@ -66,6 +66,8 @@ h3 {
 
 canvas {
     display: inline;
+    width: 95vw;
+    height: auto;
 }
 
 #loaded-images {
@@ -82,6 +84,21 @@ canvas {
     transition: opacity 2s;
     transition-delay: 2s;
     opacity: 0;
+}
+
+#loadedimagesbox
+{
+    /*width: 95vw;*/
+}
+
+#overlaybox
+{
+    /*width: 95vw;*/
+}
+
+img.resize
+{
+    max-width: 10vw;
 }
 
 table {
@@ -130,6 +147,19 @@ input {
 #warning
 {
     background-color: #1d5e9f;
+    opacity: 1;
+    transition: opacity 0.6s;
+}
+
+#overlaywarn
+{
+    background-color: #8353c9;
+    opacity: 1;
+    transition: opacity 0.6s;
+}
+#scalewarn
+{
+    background-color: #c96876;
     opacity: 1;
     transition: opacity 0.6s;
 }

@@ -1,4 +1,6 @@
 let warning = true;
+let imgcount = 0;
+let imgcountOver = 0;
 
 function PageLoad(){
     document.getElementById("main-containor").style.opacity = "1";
@@ -57,6 +59,7 @@ function DownloadCanvas()
 //source from: https://stackoverflow.com/questions/48560709/select-multiple-images-to-each-input-file
 
 function imgToData(input) {
+    overlayToData();
     srcarray = [];
         if (input.files) {
 
@@ -67,11 +70,12 @@ function imgToData(input) {
                 File.onload = function (event) {
                     $('<img/>').attr({
                         src: event.target.result,
-                        class: 'img',
-                        id: 'img-' + n + '-preview',
+                        class: 'resize',
+                        id: 'img-' + imgcount + '-preview',
                         width: parseInt(document.getElementById("width").value),
                         height: parseInt(document.getElementById("height").value)
-                    }).appendTo($("#loaded-images"));
+                    }).appendTo($("#loadedimagesbox"));
+                    imgcount += 1;
 
                     // $('<input/>').attr({
                     //     type: 'text',
@@ -91,7 +95,31 @@ function imgToData(input) {
 
 
         }
+
         return srcarray;
+
+}
+
+function overlayToData() {
+    if (document.getElementById("overlay").files) {
+
+        var length = document.getElementById("overlay").files.length;
+        $.each(document.getElementById("overlay").files, function (i, v) {
+            var n = i;
+            var File = new FileReader();
+            File.onload = function (event) {
+                $('<img/>').attr({
+                    src: event.target.result,
+                    class: 'resize',
+                    id: 'imgOver-' + imgcountOver + '-preview'
+                }).appendTo($("#overlaybox"));
+                imgcountOver += 1;
+
+            };
+
+            File.readAsDataURL(document.getElementById("overlay").files[i]);
+        });
+}
 }
 
 function addImages(imgarray) {
@@ -109,8 +137,20 @@ function addImages(imgarray) {
     let x = 0;
     let y = 0;
     let v = -1;
+    let cont = true;
+    let length = imgcount;
 
-    let length = document.getElementById("photos").files.length;
+    // while (cont)
+    // {
+    //     try
+    //     {
+    //         let temp = document.getElementById(`img-${length}-preview`);
+    //         length += 1;
+    //     }
+    //     catch (e) {
+    //         cont = false;
+    //     }
+    // }
 
     for (let i = 0; i < columns; i++)
     {
@@ -119,7 +159,7 @@ function addImages(imgarray) {
 
         for (let k = 0; k < rows; k++)
         {
-            console.log(`random checkbox = ${document.getElementById("randomBool").value}`);
+            //console.log(`random checkbox = ${document.getElementById("randomBool").value}`);
             if (document.getElementById("randomBool").checked === false)
             {
                 if (v !== (length - 1))
@@ -146,10 +186,54 @@ function addImages(imgarray) {
         y = 0;
     }
     //document.body.style.background = `#f3f3f3 url("${document.getElementById("photos").toDataURL}") no-repeat centre scroll`;
+    try {
+        let overlayfiles = document.getElementById(`imgOver-${imgcountOver - 1}-preview`);
+        let scale = parseInt(document.getElementById("overlayscale").value);
+        let width = overlayfiles.width;
+        let height = overlayfiles.height;
+        //console.log(`This image has a width of: ${width} and a height of: ${height}
+        //The canvas has a width of: ${canvas.width} and a height of: ${canvas.height}`);
+        //scales to canvas size
+        if (width > height)
+        {
+            //console.log(`This is a landscape overlay`);
+            let ratio = height * 1.0 / width;
+            //console.log(`ratio calculated: ${ratio}`);
+            width = canvas.width;
+            height = width * 1.0 * ratio;
+            //console.log(`resolution before re-scaling, width: ${width} height: ${height}`);
+            width = Math.round(width * (scale / 100));
+            height = Math.round(height * (scale / 100));
+            //console.log(`The landscape image now has a width of: ${width} and a height of: ${height}`)
+        }
+        else
+        {
+            //console.log(`This is a portrait overlay`);
+            let ratio = width * 1.0 / height;
+            height = canvas.height;
+            width = height * 1.0 * ratio;
+            width = Math.round(width * (scale / 100));
+            height = Math.round(height * (scale / 100));
+        }
+
+        let centreXCanv = canvas.width / 2;
+        let centreYCanv = canvas.height / 2;
+
+        let PosX = centreXCanv - width / 2;
+        let PosY = centreYCanv - height / 2;
+
+        //console.log(`Got to drawImage for overlay with imgOvercounter of ${imgcountOver - 1}`);
+        context.drawImage(overlayfiles, PosX, PosY, width, height)
+    }
+    catch (e) {
+        return
+    }
+
 }
 
 function deleteLoadedImages() {
-    let length = document.getElementById("photos").files.length;
+    deleteOverlays();
+    let length = imgcount;
     console.log(`Length: ${length}`);
 
     try {
@@ -159,9 +243,24 @@ function deleteLoadedImages() {
             }
         }
     catch {
-        return;
+
     }
 
+}
+
+function deleteOverlays()
+{
+    try
+    {
+        for (let i = 0; i < imgcountOver; i++)
+        {
+            let curImage = document.getElementById(`imgOver-${i}-preview`);
+            curImage.parentNode.removeChild(curImage);
+        }
+    }
+    catch (e) {
+
+    }
 }
 
 function start() {
@@ -172,6 +271,8 @@ function start() {
     window.scrollTo(0,0);
 
     let images = imgToData(document.getElementById("photos"));
+    document.getElementById("photos").value = '';
+    document.getElementById("overlay").value = '';
     //console.log(images);
 }
 
@@ -185,6 +286,22 @@ function sizeAlert() {
         document.getElementById("warning").style.opacity = "1";
         warning = false;
     }
+}
+
+function OverlayAlert() {
+    let alert = document.getElementById("alertID");
+    alert.innerHTML += `<div class="alert" id="overlaywarn"><span class="closebtn" onclick="buttonFade()">&times;</span>
+    Overlay image must have a transparent background</div>`;
+    buttonFade();
+    window.scrollTo(0,0);
+}
+
+function ScaleAlert() {
+    let alert = document.getElementById("alertID");
+    alert.innerHTML += `<div class="alert" id="scalewarn"><span class="closebtn" onclick="buttonFade()">&times;</span>
+    Scale of the overlay as a percentage, can go above 100 to increase overlay</div>`;
+    buttonFade();
+    window.scrollTo(0,0);
 }
 
 function buttonFade()
